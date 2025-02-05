@@ -8,11 +8,18 @@ app.get("/", (req, res) => {
 });
 
 app.post("/analyze", (req, res) => {
-    res.json({ message: "successfully!" });
+    const { text } = req.body;
+
+    if (!text) {
+        return res.status(400).json({ error: "Missing input ." }); 
+    }
+
+    res.json({ message: "Successfully analyzed!" });
 });
 
+
 if (process.env.NODE_ENV !== "test") {
-    app.listen(3000, () => {
+    app.listen(5000, () => {
         console.log("Server is running on port 3000");
     });
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1738667477285" clover="3.2.0">
-  <project timestamp="1738667477286" name="All files">
+<coverage generated="1738761994091" clover="3.2.0">
+  <project timestamp="1738761994091" name="All files">
     <metrics statements="16" coveredstatements="12" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2" elements="20" coveredelements="15" complexity="0" loc="16" ncloc="16" packages="1" files="2" classes="2"/>
-    <file name="formHandler.js" path="C:\Users\saifd\Desktop\Marah\marah\src\client\js\formHandler.js">
+    <file name="formHandler.js" path="C:\Users\saifd\Desktop\Github\a\NLP-Marah\marah\src\client\js\formHandler.js">
       <metrics statements="12" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
       <line num="3" count="1" type="stmt"/>
       <line num="4" count="1" type="stmt"/>
@@ -17,7 +17,7 @@
       <line num="22" count="0" type="stmt"/>
       <line num="23" count="0" type="stmt"/>
     </file>
-    <file name="nameChecker.js" path="C:\Users\saifd\Desktop\Marah\marah\src\client\js\nameChecker.js">
+    <file name="nameChecker.js" path="C:\Users\saifd\Desktop\Github\a\NLP-Marah\marah\src\client\js\nameChecker.js">
       <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="1" type="stmt"/>

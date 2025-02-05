@@ -35,13 +35,14 @@ describe(" Testing ", () => {
         expect(response.body).toEqual({ message: "Successfully analyzed!" });
     });
 
-    test(" POST / 400 ", async () => {
+    test("POST /analyze 400", async () => {
         const response = await request(app)
             .post("/analyze")
             .send({})
             .set("Accept", "application/json");
-
+    
         expect(response.statusCode).toBe(400);
-        expect(response.body).toEqual({ error: "Missing input ." });
+        expect(response.body).toEqual({ error: "Missing " }); 
     });
+    
 });
