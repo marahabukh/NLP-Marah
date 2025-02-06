@@ -1,24 +1,9 @@
-/**
- * @jest-environment jsdom
- */
-const { handleSubmit } = require("../src/client/js/formHandler");
+import { handleSubmit } from "../src/client/js/formHandler.js";
 
-describe("Testing the formHandler function", () => {
+describe("Testing ", () => {
     beforeAll(() => {
-        document.body.innerHTML = `
-            <form id="urlForm">
-                <input id="name" value="https://example.com" />
-                <button id="submitButton" type="submit">Submit</button>
-            </form>
-            <div id="results"></div>
-        `;
-
-        global.alert = jest.fn();
-        global.fetch = jest.fn(() =>
-            Promise.resolve({
-                json: () => Promise.resolve({ score_tag: "P" }),
-            })
-        );
+        document.body.innerHTML = `<input id="name" value="https://example.com" /><div id="results"></div>`;
+        global.alert = jest.fn(); 
     });
 
     test("handleSubmit should be defined", () => {
@@ -26,7 +11,24 @@ describe("Testing the formHandler function", () => {
     });
 
     test("handleSubmit should process API response", async () => {
+        global.fetch = jest.fn(() =>
+            Promise.resolve({
+                ok: true,
+                json: () =>
+                    Promise.resolve({
+                        Sentiment: "Positive",
+                        agreement: "AGREEMENT",
+                        subjectivity: "OBJECTIVE",
+                        confidence: "100",
+                        irony: "NONIRONIC",
+                        score_tag: "P+"
+                    })
+            })
+        );
+
         await handleSubmit(new Event("submit"));
+
         expect(document.getElementById("results").innerHTML).toContain("Sentiment");
+        expect(document.getElementById("results").innerHTML).toContain("Positive");
     });
 });

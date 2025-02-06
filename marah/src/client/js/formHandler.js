@@ -1,25 +1,38 @@
-import { validateInput } from "./nameChecker.js";
-
 export const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const formText = document.getElementById("name").value;
-    if (!validateInput(formText)) {
-        alert("Invalid input. Please enter a proper URL.");
+    const inputText = document.getElementById("name").value;
+
+    if (!inputText) {
+        alert("Please enter text to analyze.");
         return;
     }
 
+    console.log("::: Form Submitted :::", inputText);
+
     try {
-        const response = await fetch("http://localhost:8000/analyze", {
+        const response = await fetch("http://localhost:8081/analyze", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ text: formText }),
+            body: JSON.stringify({ text: inputText })
         });
 
-        const data = await response.json();
-        document.getElementById("results").innerHTML = `<p>Sentiment: ${data.score_tag}</p>`;
+        const result = await response.json();
+
+        if (response.ok) {
+            document.getElementById("results").innerHTML = `
+                <p><strong>Sentiment:</strong> ${result.Sentiment}</p>
+                <p><strong>Agreement:</strong> ${result.agreement}</p>
+                <p><strong>Subjectivity:</strong> ${result.subjectivity}</p>
+                <p><strong>Confidence:</strong> ${result.confidence}</p>
+                <p><strong>Irony:</strong> ${result.irony}</p>
+                <p><strong>Score Tag:</strong> ${result.score_tag}</p>
+            `;
+        } else {
+            document.getElementById("results").innerHTML = `<p>Error: ${result.error}</p>`;
+        }
     } catch (error) {
-        console.error("Error:", error);
-        alert("Failed to analyze text.");
+        console.error("Error submitting form:", error);
+        document.getElementById("results").innerHTML = "<p>Internal Server Error</p>";
     }
 };
